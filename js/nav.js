@@ -14,6 +14,38 @@ function navAllStories(evt) {
 
 $body.on("click", "#nav-all", navAllStories);
 
+/** Show story submit form on clicking story "submit" */
+
+function navSubmitStoryClick(evt) {
+  console.debug("navSubmitStoryClick", evt);
+  hidePageComponents();
+  $allStoriesList.show();
+  $submitForm.show();
+}
+
+$navSubmitStory.on("click", navSubmitStoryClick);
+
+/** Show favorite stories on click on "favorites" */
+
+function navFavoritesClick(evt) {
+  console.debug("navFavoritesClick", evt);
+  hidePageComponents();
+  putFavoritesListOnPage();
+}
+
+$body.on("click", "#nav-favorites", navFavoritesClick);
+
+/** Show My Stories on clicking "my stories" */
+
+function navMyStories(evt) {
+  console.debug("navMyStories", evt);
+  hidePageComponents();
+  putUserStoriesOnPage();
+  $ownStories.show();
+}
+
+$body.on("click", "#nav-my-stories", navMyStories);
+
 /** Show login/signup on click on "login" */
 
 function navLoginClick(evt) {
@@ -21,41 +53,27 @@ function navLoginClick(evt) {
   hidePageComponents();
   $loginForm.show();
   $signupForm.show();
+  $storiesContainer.hide()
 }
 
 $navLogin.on("click", navLoginClick);
+
+/** Hide everything but profile on click on "profile" */
+
+function navProfileClick(evt) {
+  console.debug("navProfileClick", evt);
+  hidePageComponents();
+  $userProfile.show();
+}
+
+$navUserProfile.on("click", navProfileClick);
 
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
-  $(".main-nav-links").show();
+  $(".main-nav-links").css('display', 'flex');;
   $navLogin.hide();
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
-
-function navAddStoryClick(evt){
-  hidePageComponents();
-  $addStoryForm.show();
-  // $allStoriesList.show();
-  
-}
-
-function navMyStoriesClick(){
-  hidePageComponents();
-  $addStoryForm.hide();
-  userStories();
-}
-
-function navFavoriteStoriesClick(){
-  hidePageComponents();
-  $addStoryForm.hide();
-  favoriteStories();
-}
-
-$favoriteStories.on("click", navFavoriteStoriesClick);
-
-$body.on("click", "#nav-my-story", navMyStoriesClick);
-
-$navAddStory.on("click", navAddStoryClick);
